@@ -1,0 +1,26 @@
+<main class="content">
+  <div class="progress-wrapper" *ngIf="maxVal">
+    <div class="text" *ngIf="!isFinished">
+      {{ maxVal - currentVal | number: '1.1-1' }}s
+    </div>
+
+    <div class="text" *ngIf="isFinished">
+      Timer finished!
+      <audio src="./assets/halt_stop.mp3" autoplay></audio>
+    </div>
+
+    <div class="spinner-container">
+      <mat-progress-spinner diameter="350" mode="determinate" [value]="currentVal / maxVal * 100" strokeWidth="50" color="primary"></mat-progress-spinner>
+    </div>
+    
+    <div class="controll-wrapper">
+      <div *ngIf="!isStarted">
+        <label>Minutes</label>
+        <input type="number" [(ngModel)]="max" [disabled]="isStarted" />
+      </div>
+      <br>
+      <button *ngIf="!isStarted" (click)="start()">Start</button>
+      <button *ngIf="isStarted" (click)="finish()">Stop</button>
+    </div>
+  </div>
+</main>
